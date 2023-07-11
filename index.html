@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clock using pure js</title>
+    <style>
+        #clockContainer{
+    position: relative;
+    margin: auto;
+    border: 4px solid black;
+    border-radius: 50%;
+    height: 40vw;
+    width: 40vw;
+    background: url(clock-png-6.png) no-repeat;
+    background-size: 100%;
+    
+}
+#hour, #minute, #second{
+    position: absolute;
+    background: black;
+    border-radius: 10px;
+    transform-origin: bottom;
+}
+#hour{
+width: 1.8%;
+height: 25%;
+top: 25%;
+left: 49.5%;
+opacity: 0.8;
+
+}
+#minute{
+    width: 1.6%;
+    height: 30%;
+    top: 20%;
+    left: 49.5%;
+    opacity: 0.8;
+    
+}
+#second{
+    width: 1%;
+    height: 38%;
+    top: 12%;
+    left: 49.5%;
+    opacity: 0.8;
+    
+}
+    </style>
+    
+</head>
+<body>
+    <div id="clockContainer">
+        <div id="hour"></div>
+        <div id="minute"></div>
+        <div id="second"></div>
+    </div>
+    <script>
+        function updateClock() {
+    // Get the current time
+    const now = new Date();
+
+    // Calculate the rotation degrees for each hand
+    const hour = now.getHours() % 12;
+    const minute = now.getMinutes();
+    const second = now.getSeconds();
+
+    const hourRotation = 30 * hour + 0.5 * minute; // 30 degrees per hour + 0.5 degrees per minute
+    const minuteRotation = 6 * minute; // 6 degrees per minute
+    const secondRotation = 6 * second; // 6 degrees per second
+
+    // Apply the rotation transformation to each hand
+    document.getElementById("hour").style.transform = `rotate(${hourRotation}deg)`;
+    document.getElementById("minute").style.transform = `rotate(${minuteRotation}deg)`;
+    document.getElementById("second").style.transform = `rotate(${secondRotation}deg)`;
+  }
+
+  // Update the clock every second
+  setInterval(updateClock, 1000);
+
+  // Initial call to update the clock immediately
+  updateClock();
+    </script>
+</body>
+</html>
